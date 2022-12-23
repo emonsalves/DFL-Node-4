@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+
+// const morganBody = require('morgan-body')
 const cors = require('cors')
 // const path = require('path');
 
@@ -10,6 +12,7 @@ const routes = require("./routes/index")
 // middlewares
 app.use(cors());
 app.use(morgan('dev'));
+// morganBody(app);
 app.use(express.json());
 
 // routes
