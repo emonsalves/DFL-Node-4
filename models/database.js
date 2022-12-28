@@ -14,17 +14,19 @@ const createNewData = async (titulo, url, descripcion) => {
 }
 
 const updateData = async (id) => {
-    const consulta = `SELECT likes FROM posts WHERE id = ${id}`
-    const foundSong = await databaseService.query(consulta)
-    const consulta2 = `UPDATE posts SET likes = $1 WHERE id = ${id}`
-    const values = [foundSong.rows[0].likes + 1]
-    await databaseService.query(consulta2, values)
+    const consultaGet = "SELECT likes FROM posts WHERE id = $1"
+    const values = [id]
+    const foundSong = await databaseService.query(consultaGet, values)
+    const consultaUpdate = "UPDATE posts SET likes = $2 WHERE id = $1"
+    const valuesToChange = [id, foundSong.rows[0].likes + 1]
+    await databaseService.query(consultaUpdate, valuesToChange)
 }
 
 
 const deleteData = async (id) => {
-    consulta = `DELETE FROM posts WHERE id= ${id}`
-    await databaseService.query(consulta)
+    consulta = "DELETE FROM posts WHERE id = $1";
+    values = [id]
+    await databaseService.query(consulta, values)
 }
 
 module.exports = { getAllData, createNewData, updateData, deleteData };
