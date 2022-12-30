@@ -22,7 +22,6 @@ const updateData = async (id) => {
     await databaseService.query(consultaUpdate, valuesToChange)
 }
 
-
 const deleteData = async (id) => {
     consulta = "DELETE FROM posts WHERE id = $1";
     values = [id]
